@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Gooss quickstart</title>
+
+  <!-- TODO: Add your spreadsheet RSS feed URL and uncomment the following lines -->
+  <!-- <link rel="alternate" type="application/rss+xml" title="TITLE" href="" /> -->
+
+  <link rel="stylesheet" href="css/text.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="js/underscore-min.js"></script>
+  <script type="text/javascript" src="js/gooss.js"></script>
+  <script type="text/javascript">
+    // TODO: Change this to the URL of your spreadsheet.
+    var url = "https://docs.google.com/spreadsheet/ccc?key=0Ar35F5WUAjXedE9SMDRnT0dmUXdNQmJxeG5CRXpjSVE";
+
+    // DOMContentLoaded is not available IE < 9. Use a different load method
+    // if you wish to target lower IE versions.
+    document.addEventListener("DOMContentLoaded", function() {
+      // TODO: Change "sheet_name" to the name you want to use
+      gooss.data({ sheet_name: {url: url, index: 0} }, function(err, data) {
+        if (err) {
+          document.getElementById("loading").innerHTML = "Error: " + err;
+          return;
+        }
+        gooss.template(data);
+        document.getElementById("loading").style.display = "none";
+      });
+    }, false);
+  </script>
+</head>
+<body>
+  <!-- TODO: Change this title (remember to change the <title> tag as well) -->
+  <h1>Gooss quickstart</h1>
+
+  <div id="loading"><p>Loading...</p></div>
+
+  <!-- TODO: Replace the contents of this script tag with your template -->
+  <script type="text/html">
+    <p><%- sheet_name.length %> rows in the worksheet</p>
+  </script>
+
+  <div id="footer">
+    <p>
+      Powered by <a href="https://github.com/Stuk/gooss">gooss</a>
+    </p>
+  </div>
+</body>
+</html>
